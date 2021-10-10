@@ -2,32 +2,27 @@
 Dependencies
 ********************************/
 
-const mongoose = require("./connection");
+const mongoose = require("./connection")
 
 /********************************
-Define Event Model
+Define User Model
 ********************************/
 
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const eventSchema = new Schema({
-  name: String,
-  address: String,
-  state: String,
-  city: String,
-  zip: Number,
-  date: Date,
-  attendees: Array,
-  organizer: Number
+const userSchema = new Schema ({
+  username: { type: String, required: true, unique: true},
+  password: { type: String, required: true},
+  friends: Array
 })
 
-const Event = model("Event", eventSchema);
+const User = model("User", userSchema);
 
 /********************************
-Export Event Model
+Export User Model
 ********************************/
 
-module.exports = Event;
+module.exports = User;
 
 /////////////////////////////////

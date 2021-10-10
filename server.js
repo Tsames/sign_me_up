@@ -6,6 +6,7 @@ const express = require("express");
 const morgan = require("morgan");
 const methodOverride = require("method-override");
 const EventRouter = require("./controllers/event")
+const UserRouter = require("./controllers/user")
 
 /********************************
 Express Object
@@ -27,5 +28,6 @@ Routers
 ********************************/
 
 app.use("/events", EventRouter)
+app.use("/user", UserRouter)
 
 /////////////////////////////////
