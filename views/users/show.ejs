@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/navbar.ejs") %>
+    <h1><%= user %></h1>
+     <% if (myEvents.length != 0) { %>
+      <h3>Your Events</h3>
+      <ul>
+        <% for (event of myEvents) { %>
+          <li><a href=""><%= event.name %></a></li>
+        <% } %>
+      </ul>
+     <% } %>
+
+     <h3>Events You're Signed up For</h3>
+     
+  </body>
+
+</html>

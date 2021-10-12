@@ -14,13 +14,14 @@ const model = mongoose.model;
 const eventSchema = new Schema({
   name: String,
   description: String,
-  date: Date,
+  date: String,
+  time: String,
   address: String,
   state: String,
   city: String,
   zip: Number,
   attendees: Array,
-  organizer: String
+  organizer: Object
 })
 
 const Event = model("Event", eventSchema);

@@ -12,7 +12,7 @@
               <div>
                 <h3>What</h3>
                 <label>
-                  Event Name:<input type="text" name="name" placeholder="ame of your event" />
+                  Event Name:<input type="text" name="name" placeholder="name of your event" />
                 </label>
                 <label>
                   Description:<input type="text" name="description" placeholder="Describe your event!" />
@@ -30,20 +30,20 @@
               <div>
                 <h3>Where</h3>
                 <label>
-                  ADDRESS:<input type="text" name="address" placeholder="enter fruit name" />
+                  ADDRESS:<input type="text" name="address"/>
                 </label>
                 <label>
-                  CITY:<input type="text" name="city" placeholder="enter fruit name" />
+                  CITY:<input type="text" name="city"/>
                 </label>
                 <label>
-                  STATE:<input type="text" name="state" placeholder="enter fruit name" />
+                  STATE:<input type="text" name="state"/>
                 </label>
                 <label>
-                  ZIP:<input type="number" name="zip" placeholder="enter fruit name" />
+                  ZIP:<input type="number" name="zip"/>
                 </label>
               </div>
-              <input type="hidden" name="attendees" value="<%= [] %>" />
-              <input type="hidden" name="organizer" value="<%= session.username %>" />
+              <input type="hidden" name="attendees" value="" />
+              <input type="hidden" name="organizer" value="" />
             </fieldset>
             <input type="submit" value="Create Event" />
           </form>

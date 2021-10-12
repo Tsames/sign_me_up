@@ -1,16 +1,15 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/events">Sign Me Up!</a>
-    </div>
     <ul class="nav navbar-nav">
+      <li><a href="/events"><span class="glyphicon glyphicon-home"></span> Home</a></li>
       <% if (session.loggedIn) { %>
+        <li><a href="/user/<%= session.username %>"><span class="glyphicon glyphicon-list"></span> My Events</a></li>
         <li><a href="/events/new"><span class="glyphicon glyphicon-pencil"></span> Create Event</a></li>
       <% } %>
     </ul>
     <ul class="nav navbar-nav navbar-right">
     <% if (session.loggedIn) { %>
-      <li><a href=""><span class="glyphicon glyphicon-user"></span> <%= session.username %></a></li>
+      <li><a><span class="glyphicon glyphicon-user"></span> <%= session.username %></a></li>
       <li><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     <% } else { %>
       <li><a href="/user/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

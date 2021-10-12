@@ -3,6 +3,7 @@ Dependencies
 ********************************/
 
 const express = require("express");
+const Event = require("../models/event");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
@@ -52,8 +53,8 @@ router.post("/login", (req,res) => {
     } else {
       const result = bcrypt.compareSync(password, user.password);
       if (result) {
-        req.session.username = username
-        req.session.loggedIn = true
+        req.session.username = username;
+        req.session.loggedIn = true;
         res.redirect("/events");
       } else {
         res.send("incorrect password");
@@ -65,9 +66,19 @@ router.post("/login", (req,res) => {
 //Logout Route
 router.get("/logout", (req, res) => {
   req.session.destroy((err) => {
-    res.redirect("/events")
-  })
-})
+    res.redirect("/events");
+  });
+});
+
+//Show Route
+router.get("/:username", (req, res) => {
+  const username = req.params.username;
+  User.findOne({ username }, (err, user) => {
+    Event.find({ organizer: user._id }, (err, myEvents) => {
+      res.render("users/show.ejs", { user: user.username, myEvents, session: req.session });
+    });
+  });
+});
 
 /********************************
 Export the Router

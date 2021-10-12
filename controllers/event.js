@@ -16,15 +16,6 @@ const router = express.Router();
 MiddleWare
 ********************************/
 
-const dateParser = (time, date) => {
-  const hour = Number(time.slice(0, 2));
-  const minute = Number(time.slice(3));
-  const day = Number(date.slice(8));
-  const month = Number(date.slice(5, 7)) - 1;
-  const year = Number(date.slice(0, 4));
-  const when = new Date(year, month, day, hour, minute);
-  return when;
-}
 
 /********************************
 Events Routes
@@ -41,7 +32,7 @@ router.get("/", (req,res) => {
 
 //New Route
 router.get("/new", (req,res) => {
-  res.render("./events/new.ejs");
+  res.render("./events/new.ejs", { session: req.session });
 });
 
 //Delete Route
@@ -66,12 +57,10 @@ router.put("/:id", (req,res) => {
 
 //Create Route
 router.post("/", (req,res) => {
-  const { time, date } = req.body;
-  req.body.date = dateParser(time, date);
-  delete req.body.time.delete
   req.body.zip = Number(req.body.zip);
   req.body.attendees = [];
-  req.body.organizer = 1;
+  console.log(req.session._id)
+  req.body.organizer = req.session._id;
   console.log(req.body);
 
   Event.create(req.body, (err, event) => {
