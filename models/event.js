@@ -20,7 +20,7 @@ const eventSchema = new Schema({
   city: String,
   zip: Number,
   attendees: Array,
-  organizer: Number
+  organizer: String
 })
 
 const Event = model("Event", eventSchema);

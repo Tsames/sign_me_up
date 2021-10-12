@@ -5,19 +5,13 @@
   <body>
     <%- include("../partials/navbar.ejs") %>
       <main>
-        <a href="/events/new">
-          <button>Create</button>
-        </a>
-        <div>
+        <div class="container">
           <% for (event of events) { %>
             <div class="event-card">
                 <a href="/events/<%= event._id %>">
                   <h2>
                     <%= event.name %>
                   </h2>
-                </a>
-                <a href="/events/<%= event._id %>/edit">
-                  <button>Edit Event</button>
                 </a>
             </div>
           <% } %>

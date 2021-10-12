@@ -20,7 +20,7 @@ Routes
 
 //New Route
 router.get("/signup", (req,res) => {
-  res.render("./users/signup.ejs");
+  res.render("./users/signup.ejs", { session: req.session });
 })
 
 //Create Route
@@ -39,7 +39,7 @@ router.post("/signup", async (req,res) => {
 
 //Get Login Form Route
 router.get("/login", (req,res) => {
-  res.render("./users/login.ejs")
+  res.render("./users/login.ejs", { session: req.session })
 })
 
 //Login Route
