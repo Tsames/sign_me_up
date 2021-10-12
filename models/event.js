@@ -14,8 +14,8 @@ const model = mongoose.model;
 const eventSchema = new Schema({
   name: String,
   description: String,
-  date: String,
-  time: String,
+  image: String,
+  date: Date,
   address: String,
   state: String,
   city: String,

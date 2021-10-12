@@ -4,19 +4,26 @@
 
   <body>
     <%- include("../partials/navbar.ejs") %>
-      <main>
-        <div class="container">
-          <% for (event of events) { %>
-            <div class="event-card">
-                <a href="/events/<%= event._id %>">
-                  <h2>
-                    <%= event.name %>
-                  </h2>
-                </a>
+
+    <div class="container">
+      <% for (let i=0; i < events.length; i++) { %>
+        <% if (i === 0 || i % 3 === 0) { %>
+          <div class="row">
+        <% } %>
+            <div class="col-sm-3">
+              <div class="panel panel-primary">
+                <div class="panel-heading"><%= events[i].name %></div>
+                <div class="panel-body"><img src="<%= events[i].image %>" class="img-responsive"
+                    style="width:100%" alt="Image"></div>
+                <div class="panel-footer">
+                  <%= events[i].date.toDateString() %><br>
+                  <%= events[i].address %><br>
+                  <%= events[i].city %>, <%=events[i].state %>
+                </div>
+              </div>
             </div>
-          <% } %>
-        </div>
-      </main>
+      <% } %>
+    </div>
   </body>
 
 </html>

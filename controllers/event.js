@@ -16,6 +16,13 @@ const router = express.Router();
 MiddleWare
 ********************************/
 
+const prepBody = () => {
+  req.body.zip = Number(req.body.zip);
+  req.body.attendees = [];
+  req.body.organizer = req.session._id;
+  const newDate = new Date (req.body.date);
+  console.log(newDate);
+};
 
 /********************************
 Events Routes
@@ -48,7 +55,14 @@ router.delete("/:id", (req,res) => {
 //Update Route
 router.put("/:id", (req,res) => {
   const id = req.params.id;
-  console.log(req.body);
+
+  //Make new Date Object
+  const { time, date } = req.body;
+  req.body.date = new Date(date + "T" + time);
+  delete req.body.time;
+
+  //Set other properties of the Body
+  req.body.zip = Number(req.body.zip);
 
   Event.findByIdAndUpdate(id, req.body, {new: true}, (err, event) => {
     res.redirect("/events");
@@ -57,11 +71,17 @@ router.put("/:id", (req,res) => {
 
 //Create Route
 router.post("/", (req,res) => {
+
+  //Make new Date Object
+  const { time, date } = req.body;
+  req.body.date = new Date(date + "T" + time);
+  delete req.body.time;
+
+  //Set other properties of the Body
   req.body.zip = Number(req.body.zip);
   req.body.attendees = [];
-  console.log(req.session._id)
   req.body.organizer = req.session._id;
-  console.log(req.body);
+
 
   Event.create(req.body, (err, event) => {
     res.redirect("/events");
