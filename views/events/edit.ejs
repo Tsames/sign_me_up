@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/header.ejs") %>
+      <main>
+        <div>
+          <form action="/events/<%= event._id %>" method="post">
+            <fieldset>
+              <legend>Edit <%= event.name %></legend>
+              <div>
+                <h3>What</h3>
+                <label>
+                  Event Name:<input type="text" name="name" value="<%= event.name %>" />
+                </label>
+                <label>
+                  Description:<input type="text" name="description" value="<%= event.description %>" />
+                </label>
+              </div>
+              <div>
+                <h3>When</h3>
+                <label>
+                  Date:<input type="date" name="date" value="<%= event.date %>"/>
+                </label>
+                <label>
+                  Time:<br><input type="time" name="time" />
+                </label>
+              </div>
+              <div>
+                <h3>Where</h3>
+                <label>
+                  ADDRESS:<input type="text" name="address" value="<%= event.address %>" />
+                </label>
+                <label>
+                  CITY:<input type="text" name="city" value="<%= event.city %>" />
+                </label>
+                <label>
+                  STATE:<input type="text" name="state" value="<%= event.state %>" />
+                </label>
+                <label>
+                  ZIP:<input type="number" name="zip" value="<%= event.zip %>" />
+                </label>
+              </div>
+              <input type="hidden" name="attendees" value="<%= event.attendees %>" />
+              <input type="hidden" name="organizer" value="<%= event.organizer %>" />
+            </fieldset>
+            <input type="submit" value="Create Event" />
+          </form>
+        </div>
+      </main>
+  </body>
+
+</html>

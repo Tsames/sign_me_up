@@ -13,11 +13,12 @@ const model = mongoose.model;
 
 const eventSchema = new Schema({
   name: String,
+  description: String,
+  date: Date,
   address: String,
   state: String,
   city: String,
   zip: Number,
-  date: Date,
   attendees: Array,
   organizer: Number
 })

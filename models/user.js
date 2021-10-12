@@ -13,8 +13,7 @@ const model = mongoose.model;
 
 const userSchema = new Schema ({
   username: { type: String, required: true, unique: true},
-  password: { type: String, required: true},
-  friends: Array
+  password: { type: String, required: true}
 })
 
 const User = model("User", userSchema);

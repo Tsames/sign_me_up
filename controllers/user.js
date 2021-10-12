@@ -16,6 +16,59 @@ const router = express.Router();
 Routes
 ********************************/
 
+/******** Signup Routes ********/
+
+//New Route
+router.get("/signup", (req,res) => {
+  res.render("./users/signup.ejs");
+})
+
+//Create Route
+router.post("/signup", async (req,res) => {
+  //Hash the Password
+  req.body.password = await bcrypt.hash(req.body.password, await bcrypt.genSalt(10))
+  //Create the user
+  User.create(req.body, (err, user) => {
+    console.log("User created!");
+    console.log(user)
+    res.redirect("/user/login");
+  })
+})
+
+/******** Login Routes ********/
+
+//Get Login Form Route
+router.get("/login", (req,res) => {
+  res.render("./users/login.ejs")
+})
+
+//Login Route
+router.post("/login", (req,res) => {
+  const {username, password } = req.body;
+  
+  User.findOne({ username }, (err, user) => {
+    if(!user) {
+      res.send("User does not exist!")
+    } else {
+      const result = bcrypt.compareSync(password, user.password);
+      if (result) {
+        req.session.username = username
+        req.session.loggedIn = true
+        res.redirect("/events");
+      } else {
+        res.send("incorrect password");
+      }
+    }
+  });
+});
+
+//Logout Route
+router.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    res.redirect("/events")
+  })
+})
+
 /********************************
 Export the Router
 ********************************/

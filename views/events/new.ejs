@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/header.ejs") %>
+      <main>
+        <div>
+          <form action="/events" method="post">
+            <fieldset>
+              <legend>Create a New Event</legend>
+              <div>
+                <h3>What</h3>
+                <label>
+                  Event Name:<input type="text" name="name" placeholder="ame of your event" />
+                </label>
+                <label>
+                  Description:<input type="text" name="description" placeholder="Describe your event!" />
+                </label>
+              </div>
+              <div>
+                <h3>When</h3>
+                <label>
+                  Date:<input type="date" name="date"/>
+                </label>
+                <label>
+                  Time:<br><input type="time" name="time"/>
+                </label>
+              </div>
+              <div>
+                <h3>Where</h3>
+                <label>
+                  ADDRESS:<input type="text" name="address" placeholder="enter fruit name" />
+                </label>
+                <label>
+                  CITY:<input type="text" name="city" placeholder="enter fruit name" />
+                </label>
+                <label>
+                  STATE:<input type="text" name="state" placeholder="enter fruit name" />
+                </label>
+                <label>
+                  ZIP:<input type="number" name="zip" placeholder="enter fruit name" />
+                </label>
+              </div>
+              <input type="hidden" name="attendees" value="<%= [] %>" />
+              <input type="hidden" name="organizer" value="<%= 1 %>" />
+            </fieldset>
+            <input type="submit" value="Create Event" />
+          </form>
+        </div>
+      </main>
+  </body>
+
+</html>
