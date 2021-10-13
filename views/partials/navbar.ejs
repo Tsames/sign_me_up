@@ -15,13 +15,13 @@
       <% } %>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-    <% if (session.loggedIn) { %>
-      <li><a><span class="glyphicon glyphicon-user"></span> <%= session.username %></a></li>
-      <li><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-    <% } else { %>
-      <li><a href="/user/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    <% } %>
+      <% if (session.loggedIn) { %>
+        <li><a><span class="glyphicon glyphicon-user"></span> <%= session.username %></a></li>
+        <li><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      <% } else { %>
+        <li><a href="/user/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <% } %>
     </ul>
   </div>
 </nav><br>
