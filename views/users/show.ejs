@@ -9,12 +9,12 @@
       <h3>Your Events</h3>
       <ul>
         <% for (event of myEvents) { %>
-          <li><a href=""><%= event.name %></a></li>
+          <li><a href="/events/<%= event._id %>"><%= event.name %></a></li>
         <% } %>
       </ul>
      <% } %>
-
      <h3>Events You're Signed up For</h3>
+     
      
   </body>
 

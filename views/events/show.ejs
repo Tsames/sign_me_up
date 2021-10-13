@@ -11,13 +11,23 @@
             <h2>
               <%= event.name %>
             </h2>
-            <img src="<%= event.image %>"
+            <img src="<%= event.image %>"><br>
             <h5><%= event.date.toDateString() %></h5>
             <h5><%= event.address %>, <%= event.city %>, <%= event.state %></h5>
             <p><%= event.description %></p>
+            <% if (event.attendees.length > 0) { %>
+              <h5>Attendees:</h5>
+              <ul>
+                <% for (attendee of event.attendees) { %>
+                  <li><%= attendee %></li>
+                <% } %>
+              </ul>
+            <% } else { %>
+              <p>No one is signed up yet :/</p>
+            <% } %>
             <div class="show-buttons">
-              <% if (session.loggedIn && user._id.toString() != event.organizer.toString()) { %>
-                <a href="">
+              <% if (session.loggedIn && user._id.toString() != event.organizer.toString() && !event.attendees.includes(session.username)) { %>
+                <a href="/events/<%= event._id %>/signup">
                   <button class="btn btn-primary">Sign up!</button>
                 </a>
               <% } %>
@@ -25,9 +35,9 @@
                 <a href="/events/<%= event._id %>/edit">
                   <button class="btn btn-warning">Edit Event</button>
                 </a>
-                <a href="/events/<%= event._id %>" >
-                  <button class="btn btn-danger">Delete Event</button>
-                </a>
+                <form action="/events/<%= event._id %>?_method=DELETE" method="post">
+                  <input class="btn btn-danger" type="submit" value="Delete Event">
+                </form>
               <% } %>
             </div>
           </article>

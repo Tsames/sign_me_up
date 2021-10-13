@@ -6,7 +6,7 @@
     <%- include("../partials/navbar.ejs") %>
       <main>
         <div>
-          <form action="/events/<%= event._id %>" method="post">
+          <form action="/events/<%= event._id %>?_method=PUT" method="post">
             <fieldset>
               <legend>Edit <%= event.name %></legend>
               <div>
@@ -17,6 +17,9 @@
                 <label>
                   Description:<input type="text" name="description" value="<%= event.description %>" />
                 </label>
+                <label>
+                  Image:<input type="img" name="image" value="<%= event.image %>"/>
+                </label
               </div>
               <div>
                 <h3>When</h3>
@@ -42,10 +45,10 @@
                   ZIP:<input type="number" name="zip" value="<%= event.zip %>" />
                 </label>
               </div>
-              <input type="hidden" name="attendees" value="<%= event.attendees %>" />
-              <input type="hidden" name="organizer" value="<%= event.organizer %>" />
+              <input type="hidden" name="attendees"/>
+              <input type="hidden" name="organizer"/>
             </fieldset>
-            <input type="submit" value="Create Event" />
+            <input type="submit" value="Change Event" />
           </form>
         </div>
       </main>

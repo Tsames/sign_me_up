@@ -40,10 +40,22 @@ router.get("/new", (req,res) => {
   res.render("./events/new.ejs", { session: req.session });
 });
 
+//Attendees Route
+router.get("/:id/signup", (req,res) => {
+  const id = req.params.id;
+  const user = req.session.username
+
+  Event.findByIdAndUpdate( id, { $push: { attendees: username } }, { new: true }, (err, edittedEvent) => {
+    console.log(edittedEvent);
+    res.redirect(`/events/${id}`);
+  });
+})
+
 //Delete Route
 router.delete("/:id", (req,res) => {
-  const id = req.body.id;
-  Event.findByIdAndRemove({ id }, (err, event) => {
+  const id = req.params.id;
+  console.log(id);
+  Event.findOneAndRemove({ _id: id }, (err, event) => {
     console.log("Deleted Event:");
     console.log(event);
     res.redirect("/events");
@@ -54,16 +66,25 @@ router.delete("/:id", (req,res) => {
 router.put("/:id", (req,res) => {
   const id = req.params.id;
 
-  //Make new Date Object
-  const { time, date } = req.body;
-  req.body.date = new Date(date + "T" + time);
-  delete req.body.time;
+  Event.findById(id, (err, event) => {
 
-  //Set other properties of the Body
-  req.body.zip = Number(req.body.zip);
+    //Make new Date Object
+    req.body.date = new Date(req.body.date + "T" + req.body.time);
+    delete req.body.time;
 
-  Event.findByIdAndUpdate(id, req.body, {new: true}, (err, event) => {
-    res.redirect("/events");
+    //Set other properties of the Body
+    req.body.zip = Number(req.body.zip);
+
+    //Set organizer and attendees
+    req.body.attendees = event.attendees;
+    req.body.organizer = event.organizer;
+
+    console.log(req.body);
+
+    Event.findByIdAndUpdate(id, req.body, { new: true }, (err, event) => {
+      console.log(event);
+      res.redirect("/events");
+    });
   });
 });
 
@@ -105,7 +126,7 @@ router.get("/:id", (req,res) => {
         res.render("./events/show.ejs", { user, event, session: req.session });
       });
     } else {
-      res.render(".events/show.ejs", {})
+      res.render("./events/show.ejs", { event, session: req.session })
     }
   });
 });
