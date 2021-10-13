@@ -30,8 +30,6 @@ Events Routes
 
 //Index Route
 router.get("/", (req,res) => {
-  console.log("Req Session:")
-  console.log(req.session);
   Event.find({}, (err, events) => {
     res.render("./events/index.ejs", { events, session: req.session });
   });
@@ -98,9 +96,17 @@ router.get("/:id/edit", (req,res) => {
 
 //Show Route
 router.get("/:id", (req,res) => {
-  const id = req.body.id;
-  Event.findById({ id }, (err, event) => {
-    res.render("./events/show.ejs", { event, session: req.session });
+  const id = req.params.id;
+
+  Event.findOne({ _id: id }, (err, event) => {
+    if (req.session.loggedIn) {
+      username = req.session.username;
+      User.findOne({ username }, (err, user) => {
+        res.render("./events/show.ejs", { user, event, session: req.session });
+      });
+    } else {
+      res.render(".events/show.ejs", {})
+    }
   });
 });
 

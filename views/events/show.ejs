@@ -11,6 +11,25 @@
             <h2>
               <%= event.name %>
             </h2>
+            <img src="<%= event.image %>"
+            <h5><%= event.date.toDateString() %></h5>
+            <h5><%= event.address %>, <%= event.city %>, <%= event.state %></h5>
+            <p><%= event.description %></p>
+            <div class="show-buttons">
+              <% if (session.loggedIn && user._id.toString() != event.organizer.toString()) { %>
+                <a href="">
+                  <button class="btn btn-primary">Sign up!</button>
+                </a>
+              <% } %>
+              <% if (session.loggedIn && user._id.toString() === event.organizer.toString()) { %>
+                <a href="/events/<%= event._id %>/edit">
+                  <button class="btn btn-warning">Edit Event</button>
+                </a>
+                <a href="/events/<%= event._id %>" >
+                  <button class="btn btn-danger">Delete Event</button>
+                </a>
+              <% } %>
+            </div>
           </article>
 
         </div>

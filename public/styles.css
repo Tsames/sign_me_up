@@ -86,11 +86,6 @@ Desktop Media Query
     background-size: cover;
   }
 
-  .navbar {
-    margin-bottom: 50px;
-    border-radius: 0;
-  }
-
   ul.navbar-nav {
     margin-left: 10em;
   }
@@ -117,7 +112,7 @@ Desktop Media Query
   div.panel-heading {
     font-size: large;
     color: rgba(19, 54, 83, 0.952)
-    margin: 0.5em 0em 0em, 0em;
+    margin: .5em 0em 0em, 0em;
   }
   
   div.panel-footer {
