@@ -75,7 +75,9 @@ router.get("/:username", (req, res) => {
   const username = req.params.username;
   User.findOne({ username }, (err, user) => {
     Event.find({ organizer: user._id }, (err, myEvents) => {
-      res.render("users/show.ejs", { user: user.username, myEvents, session: req.session });
+      Event.find({ attendees: `${username}` }, (err, goingEvents) => {
+        res.render("users/show.ejs", { user: user.username, myEvents, goingEvents, session: req.session });
+      });
     });
   });
 });

@@ -38,6 +38,10 @@ Routers
 app.use("/events", EventRouter)
 app.use("/user", UserRouter)
 
+app.get("/", (req,res) => {
+  res.redirect("/events");
+})
+
 /********************************
 Server Listener
 ********************************/

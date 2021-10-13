@@ -13,9 +13,16 @@
         <% } %>
       </ul>
      <% } %>
-     <h3>Events You're Signed up For</h3>
-     
-     
+    <% if (goingEvents.length != 0) { %>
+      <h3>Events You're going To:</h3>
+      <ul>
+        <% for (event of goingEvents) { %>
+          <li><a href="/events/<%= event._id %>">
+            <%= event.name %>
+          </a></li>
+        <% } %>
+      </ul>
+    <% } %> 
   </body>
 
 </html>
